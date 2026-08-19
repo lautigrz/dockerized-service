@@ -11,8 +11,8 @@ permissions:
 
 env:
   ECR_REPOSITORY: node-service
-  APP_USER: ${{ secrets.USER }}
-  APP_PASSWORD: ${{ secrets.PASSWORD }}
+  APP_USER: ${{ secrets.APP_USER }}
+  APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
 
 
 jobs:
