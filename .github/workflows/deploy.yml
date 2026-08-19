@@ -11,9 +11,6 @@ permissions:
 
 env:
   ECR_REPOSITORY: node-service
-  APP_USER: ${{ secrets.APP_USER }}
-  APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
-
 
 jobs:
   deploy:
@@ -55,12 +52,13 @@ jobs:
           env:
             USER: ${{ secrets.APP_USER }}
             PASSWORD: ${{ secrets.APP_PASSWORD }}
+            SECRET_MESSAGE: ${{ secrets.APP_SECRET_MESSAGE }}
             ECR_REPOSITORY: node-service
           with:
             host: ${{ secrets.EC2_HOST }}
             username: ${{ secrets.EC2_USER }}
             key: ${{ secrets.EC2_SSH_KEY }}
-            envs: USER,PASSWORD,ECR_REPOSITORY
+            envs: USER,PASSWORD,SECRET_MESSAGE,ECR_REPOSITORY
             script: |
                 echo "REGISTRY: '${{ steps.login-ecr.outputs.registry }}'"
                 echo "REPOSITORY: '$ECR_REPOSITORY'"
@@ -78,5 +76,6 @@ jobs:
                   --name node-service \
                   -e USER="$USER" \
                   -e PASSWORD="$PASSWORD" \
+                  -e SECRET_MESSAGE="$SECRET_MESSAGE" \
                   -p 3000:3000 \
                   "$IMAGE"
