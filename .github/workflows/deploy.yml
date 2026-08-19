@@ -9,6 +9,9 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  ECR_REPOSITORY: node-service
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
