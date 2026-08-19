@@ -40,6 +40,11 @@ jobs:
 
       # 4. Construir imagen
       # ...
+        - name: Check files
+          run: |
+            pwd
+            ls -la
+
         - name: Build Docker image
           run: |
             docker build -t node-service:alpine .     
