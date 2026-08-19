@@ -40,7 +40,9 @@ jobs:
 
       # 4. Construir imagen
       # ...
-
+        - name: Build Docker image
+          run: |
+            docker build -t node-service:alpine .     
       # 5. Push a ECR
       # ...
 
