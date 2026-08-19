@@ -52,7 +52,7 @@ jobs:
           env:
             USER: ${{ secrets.APP_USER }}
             PASSWORD: ${{ secrets.APP_PASSWORD }}
-            SECRET_MESSAGE: ${{ secrets.APP_SECRET_MESSAGE }}
+            SECRET_MESSAGE: ${{ secrets.SECRET_MESSAGE }}
             ECR_REPOSITORY: node-service
           with:
             host: ${{ secrets.EC2_HOST }}
