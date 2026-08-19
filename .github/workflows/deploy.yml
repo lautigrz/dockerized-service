@@ -60,5 +60,5 @@ jobs:
               docker pull ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:alpine
               docker stop node-service || true
               docker rm node-service || true
-              docker run -d  --name node-service -p -e USER="$USER" -e PASSWORD="$PASSWORD" 3000:3000 ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:alpine  
+              docker run -d  --name node-service -e USER="$USER" -e PASSWORD="$PASSWORD" -p 3000:3000 ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:alpine  
    
