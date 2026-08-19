@@ -10,7 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
+
+       # 2. Autenticarse en AWS mediante OIDC
+      # ...
+
+      # 3. Login en ECR
+      # ...
+
+      # 4. Construir imagen
+      # ...
+
+      # 5. Push a ECR
+      # ...
+
+      # 6. Conectarse a EC2
+      # ...
+
+      # 7. Actualizar contenedor
+      # ...
