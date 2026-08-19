@@ -14,24 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: Checkout code
-          uses: actions/setup-node@v4
-          with:
-            node-version: 22
-
-        - name: Debug OIDC
-          run: |
-            echo "Repository: $GITHUB_REPOSITORY"
-            echo "Repository ID: $GITHUB_REPOSITORY_ID"
-            echo "Owner ID: $GITHUB_REPOSITORY_OWNER_ID"
-            echo "Ref: $GITHUB_REF"      
-
+          uses: actions/checkout@v4
 
        # 2. Autenticarse en AWS mediante OIDC
         - name: Configure AWS credentials   
           uses: aws-actions/configure-aws-credentials@v4 
           with:
             role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-            aws-region: us-east-1
+            aws-region: us-east-2
 
       # 3. Login en ECR
         - name: Login to Amazon ECR
@@ -39,12 +29,7 @@ jobs:
           uses: aws-actions/amazon-ecr-login@v2    
 
       # 4. Construir imagen
-      # ...
-        - name: Check files
-          run: |
-            pwd
-            ls -la
-
+      
         - name: Build Docker image
           run: |
             docker build -t node-service:alpine .     
