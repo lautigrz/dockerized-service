@@ -34,7 +34,7 @@ jobs:
             aws-region: us-east-1
 
       # 3. Login en ECR
-      # ...
+   
 
       # 4. Construir imagen
       # ...
