@@ -21,7 +21,7 @@ jobs:
           uses: aws-actions/configure-aws-credentials@v4 
           with:
             role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-            aws-region: us-east-2
+            aws-region: ${{ secrets.AWS_REGION }}
 
       # 3. Login en ECR
         - name: Login to Amazon ECR
@@ -32,9 +32,15 @@ jobs:
       
         - name: Build Docker image
           run: |
-            docker build -t node-service:alpine .     
+            docker build -t node-service:alpine .
+        - name: Tag Docker image
+          run: |
+            docker tag node-service:alpine ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:alpine
       # 5. Push a ECR
-      # ...
+
+        - name: Push Docker image to Amazon ECR
+          run: |
+            docker push ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:alpine
 
       # 6. Conectarse a EC2
       # ...
