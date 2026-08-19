@@ -51,13 +51,17 @@ jobs:
       # 6. Conectarse a EC2
       # ...
         - name: Deploy to EC2
-          uses: appleboy/ssh-action@v1.2.2  
+          uses: appleboy/ssh-action@v1.2.2
+          env:
+            USER: ${{ secrets.APP_USER }}
+            PASSWORD: ${{ secrets.APP_PASSWORD }}
+            ECR_REPOSITORY: node-service
           with:
             host: ${{ secrets.EC2_HOST }}
             username: ${{ secrets.EC2_USER }}
             key: ${{ secrets.EC2_SSH_KEY }}
+            envs: USER,PASSWORD,ECR_REPOSITORY
             script: |
-              script: |
                 echo "REGISTRY: '${{ steps.login-ecr.outputs.registry }}'"
                 echo "REPOSITORY: '$ECR_REPOSITORY'"
 
