@@ -58,9 +58,6 @@ jobs:
             key: ${{ secrets.EC2_SSH_KEY }}
             script: |
 
-              echo "APP_USER está definido: ${APP_USER:+si}"
-              echo "APP_PASSWORD está definido: ${APP_PASSWORD:+si}"
-
               docker pull ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:alpine
               docker stop node-service || true
               docker rm node-service || true
